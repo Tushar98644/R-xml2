@@ -1,6 +1,6 @@
-R-xml2
+# GSoC Project Task: Supporting Migration from XML Package
 
-Welcome to the R-xml2 repository! This repository contains tests and examples for working with XML content using the xml2 package in R. Below you'll find information on how to navigate this repository and run the provided tests.
+Welcome to the R-xml2 repository! This repository contains tests and examples for working with XML content using the xml2 package in R. Below you'll find information on how to navigate this repository and run the provided tests. This project aims to contribute to the migration efforts from the XML package to the xml2 package in R.
 
 ## Table of Contents
 
@@ -11,11 +11,11 @@ Welcome to the R-xml2 repository! This repository contains tests and examples fo
 - [Contributing](#contributing)
 - [License](#license)
 
-# Introduction
+## Introduction
 
-The xml2 package in R provides a powerful set of tools for parsing and working with XML and HTML content. This repository aims to provide comprehensive tests and examples to help users understand and leverage the capabilities of the xml2 package.
+The XML package in R has been in maintenance mode for several years, and there's a push to migrate packages depending on XML to alternatives such as xml2, which is actively developed. This project aims to support this migration effort by contributing patches to packages dependent on XML, implementing the switch to xml2, and documenting example mappings from XML to xml2 code.
 
-# Tests Overview
+## Tests Overview
 
 This repository contains three tests:
 
@@ -29,35 +29,37 @@ Each test is designed to progressively increase in difficulty, providing users w
 
 # Installation
 
-To run the tests in this repository, you'll need to have R installed on your system. You can download and install R from the official R website.
+Before running the tests or contributing to this project, ensure that you have the following packages installed:
 
-Additionally, ensure that you have the xml2 package installed. You can install it from CRAN using the following command:
+1. xml2
+2. XML
+3. stringr
+
+You can install these packages using the following R commands:
 
 ```
 install.packages("xml2")
+install.packages("XML")
+install.packages("stringr")
 ```
 
 # Usage
 
-To run the tests, follow these steps:
+To run the tests for this project, follow these steps:
 
-Clone this repository to your local machine:
-
-```
-git clone https://github.com/your-username/R-xml2.git
-```
-
-Navigate to the repository directory:
+1. Clone this repository to your local machine.
+2. Open RStudio or any other R environment.
+3. Load the required packages:
 
 ```
-cd R-xml2
+library(xml2)
+library(XML)
+library(stringr)
 ```
 
-Open R or RStudio and set the working directory to the repository directory.
-
-Run the desired test script (easy-test.R, medium-test.R, or hard-test.R) to execute the corresponding test.
-
-Follow the instructions and examine the output to verify the correctness of the test.
+5. Navigate to the directory where the repository is cloned.
+6. Open the R script corresponding to the test you wish to run.
+7. Run the script in your R environment.
 
 # Contributing
 
@@ -67,4 +69,5 @@ Before contributing, please review the contribution guidelines.
 
 # License
 
-This project is licensed under the MIT License.
+
+This project is licensed under the [GPL-3.0 Public License](LICENSE).
