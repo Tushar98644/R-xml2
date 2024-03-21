@@ -1,7 +1,8 @@
-library(xml2)
-library(stringr)
+# Load the XML package
+library(XML)
 
-xml_string <- c(
+# Define the XML content as a character vector
+xml_content <- c(
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<movies>',
   '<movie mins="126" lang="eng">',
@@ -22,59 +23,65 @@ xml_string <- c(
   '<year>2001</year>',
   '<genre>drama</genre>',
   '</movie>',
-  '</movies>')
+  '</movies>'
+)
 
-doc <- read_xml(paste(xml_string, collapse = ''))
-doc
+# Parse the XML content
+xml_doc <- xmlTreeParse(paste(xml_content, collapse = ''), useInternalNodes = TRUE)
 
-movies <- xml_root(doc)
-movies
+# Print the parsed XML document
+print(xml_doc)
 
-identical(doc, movies)
+# Get the root node of the XML document
+movies_node <- xmlRoot(xml_doc)
 
-xml_length(doc)
+# Print the name of the root node
+cat("Root Node Name:", xmlName(movies_node), "\n")
 
-xml_children(doc)
+# Get the attributes of the root node
+root_attrs <- xmlAttrs(movies_node)
 
-good_will <- xml_child(doc,search = 1)
-good_will
+# Print the attributes of the root node
+cat("Root Node Attributes:", "\n")
+print(root_attrs)
 
-xml_name(good_will)
-title1 <- xml_child(good_will,"title")
-director1 <- xml_child(good_will,"director")
-year1 <- xml_child(good_will,"year")
-genre1 <- xml_child(good_will,"genre")
+# Get the children nodes of the root node
+movie_nodes <- xmlChildren(movies_node)
 
-
-mama_tambien <- xml_child(doc, search = 2)
-mama_tambien
-
-xml_name(mama_tambien)
-title2 <- xml_child(mama_tambien,"title")
-director2 <- xml_child(mama_tambien,"director")
-year2 <- xml_child(mama_tambien,"year")
-genre2 <- xml_child(mama_tambien,"genre")
-
-# Define the information for the first movie
-title1_text <- xml_text(title1)
-director1_first <- xml_text(xml_child(director1, "first_name"))
-director1_last <- xml_text(xml_child(director1, "last_name"))
-year1_text <- xml_text(year1)
-genre1_text <- xml_text(genre1)
-
-# Define the information for the second movie
-title2_text <- xml_text(title2)
-director2_first <- xml_text(xml_child(director2, "first_name"))
-director2_last <- xml_text(xml_child(director2, "last_name"))
-year2_text <- xml_text(year2)
-genre2_text <- xml_text(genre2)
-
-# Create the paragraphs
-paragraph1 <- paste("The first movie is", title1_text, "directed by", director1_first, director1_last,
-                    "released in", year1_text, "and falls under the genre of", genre1_text, ".")
-paragraph2 <- paste("The second movie is", title2_text, "directed by", director2_first, director2_last,
-                    "released in", year2_text, "and falls under the genre of", genre2_text, ".")
-
-# Print the paragraphs
-print(paragraph1)
-print(paragraph2)
+# Iterate through each movie node
+for (i in seq_along(movie_nodes)) {
+  movie_node <- movie_nodes[[i]]
+  
+  # Print the name of the movie node
+  cat("Movie Node", i, "Name:", xmlName(movie_node), "\n")
+  
+  # Get the attributes of the movie node
+  movie_attrs <- xmlAttrs(movie_node)
+  
+  # Print the attributes of the movie node
+  cat("Movie Node", i, "Attributes:", "\n")
+  print(movie_attrs)
+  
+  # Get the children nodes of the movie node
+  movie_children <- xmlChildren(movie_node)
+  
+  # Iterate through each child node of the movie node
+  for (j in seq_along(movie_children)) {
+    child_node <- movie_children[[j]]
+    
+    # Print the name of the child node
+    cat("Child Node", j, "Name:", xmlName(child_node), "\n")
+    
+    # Print the content of the child node
+    cat("Child Node", j, "Content:", xmlValue(child_node), "\n")
+    
+    # Get the attributes of the child node
+    child_attrs <- xmlAttrs(child_node)
+    
+    # Print the attributes of the child node
+    cat("Child Node", j, "Attributes:", "\n")
+    print(child_attrs)
+  }
+  
+  cat("\n")
+}
