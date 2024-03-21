@@ -45,9 +45,7 @@ parse_xml_to_list <- function(xml_string) {
       return(setNames(list_result, xml_name(children)))
     }
   }
-  
-  # Convert the root node to a list
-  
+    
   result <- xml_to_list(xml_doc)
   
   return(result)
