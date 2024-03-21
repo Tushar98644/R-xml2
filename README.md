@@ -58,7 +58,7 @@ library(stringr)
 ```
 
 5. Navigate to the directory where the repository is cloned.
-6. Open the R script corresponding to the test you wish to run.
+6. Run the desired test script (easy-test.R, medium-test.R, or hard-test.R) to execute the corresponding test.
 7. Run the script in your R environment.
 
 # Contributing
