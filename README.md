@@ -61,6 +61,13 @@ library(stringr)
 6. Run the desired test script (easy-test.R, medium-test.R, or hard-test.R) to execute the corresponding test.
 7. Run the script in your R environment.
 
+## Viewing Test Results
+
+Click on the specific test to view the results:
+
+- [Easy Test Analysis](https://tushar98644.github.io/R-xml2/output/easy/analysis.html)
+- [Medium Test Analysis](https://tushar98644.github.io/R-xml2/output/medium/analysis.html)
+
 # Contributing
 
 Contributions to this repository are welcome! If you have ideas for additional tests, improvements to existing tests, or any other enhancements, feel free to open an issue or submit a pull request.
