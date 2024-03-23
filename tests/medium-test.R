@@ -26,22 +26,33 @@ xml_content <- c(
 
 xml_doc <- xmlTreeParse(paste(xml_content, collapse = ''), useInternalNodes = TRUE)
 
-print(xml_doc)
+xml_doc
 
 class(xml_doc)
 
+xmlSize(xml_doc)
+
 movies_node <- xmlRoot(xml_doc)
+movies_node
+
+class(movies_node)
+
+xmlSize(movies_node)
+
+identical(xml_doc,movies_node)
 
 cat("Root Node Name:", xmlName(movies_node), "\n")
 
 root_attrs <- xmlAttrs(movies_node)
 
-cat("Root Node Attributes:", "\n")
+cat("Root Node Attributes:","\n")
 print(root_attrs)
 
 movie_nodes <- xmlChildren(movies_node)
+print(movie_nodes)
 
 for (i in seq_along(movie_nodes)) {
+  
   movie_node <- movie_nodes[[i]]
   
   cat("Movie Node", i, "Name:", xmlName(movie_node), "\n")
@@ -50,6 +61,16 @@ for (i in seq_along(movie_nodes)) {
   
   cat("Movie Node", i, "Attributes:", "\n")
   print(movie_attrs)
+  
+  movie_node_length <- xmlSize(movie_node)
+  
+  cat("Movie Node", i, "Length:", "\n")
+  print(movie_node_length)
+  
+  movie_node_children <- xmlChildren(movie_node)
+  
+  cat("Movie Node", i, "Children:", "\n")
+  print(movie_node_children)
   
   movie_children <- xmlChildren(movie_node)
   
@@ -64,6 +85,17 @@ for (i in seq_along(movie_nodes)) {
     
     cat("Child Node", j, "Attributes:", "\n")
     print(child_attrs)
+    
+    child_length <- xmlSize(child_node)
+    
+    cat("Child Node", j, "Length:", "\n")
+    print(child_length)
+    
+    child_children <- xmlChildren(child_node)
+    
+    cat("Child Node", j, "Children:", "\n")
+    print(child_children)
+    
   }
   
   cat("\n")
