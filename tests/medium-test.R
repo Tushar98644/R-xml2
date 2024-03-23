@@ -28,6 +28,8 @@ xml_doc <- xmlTreeParse(paste(xml_content, collapse = ''), useInternalNodes = TR
 
 print(xml_doc)
 
+class(xml_doc)
+
 movies_node <- xmlRoot(xml_doc)
 
 cat("Root Node Name:", xmlName(movies_node), "\n")

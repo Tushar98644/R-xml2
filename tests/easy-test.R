@@ -27,8 +27,12 @@ xml_string <- c(
 doc <- read_xml(paste(xml_string, collapse = ''))
 doc
 
+class(doc)
+
 movies <- xml_root(doc)
 movies
+
+class(movies)
 
 identical(doc, movies)
 
@@ -40,10 +44,16 @@ mama_tambien <- xml_child(doc, search = 2)
 mama_tambien
 
 xml_children(mama_tambien)
+
 xml_name(mama_tambien)
 xml_attrs(mama_tambien)
+xml_length(mama_tambien)
+
+xml_name(xml_children(mama_tambien))
 
 director <- xml_child(mama_tambien,"director")
 director
+
+xml_contents(director)
 
 xml_text(director)
