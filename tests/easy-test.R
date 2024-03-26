@@ -1,6 +1,8 @@
+# Load required libraries
 library(xml2)
 library(stringr)
 
+# Define the XML string
 xml_string <- c(
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<movies>',
@@ -22,38 +24,28 @@ xml_string <- c(
   '<year>2001</year>',
   '<genre>drama</genre>',
   '</movie>',
-  '</movies>')
+  '</movies>'
+)
 
+# Read the XML string into an XML document
 doc <- read_xml(paste(xml_string, collapse = ''))
+
+# Print the XML document
 doc
 
-class(doc)
-
-movies <- xml_root(doc)
-movies
-
-class(movies)
-
-identical(doc, movies)
-
-xml_length(doc)
-
-xml_children(doc)
-
+# Extract the second movie node from the XML document
 mama_tambien <- xml_child(doc, search = 2)
 mama_tambien
 
+# List all child nodes of the second movie node
 xml_children(mama_tambien)
 
-xml_name(mama_tambien)
-xml_attrs(mama_tambien)
-xml_length(mama_tambien)
-
-xml_name(xml_children(mama_tambien))
-
-director <- xml_child(mama_tambien,"director")
+# Extract the director node from the second movie node
+director <- xml_child(mama_tambien, "director")
 director
 
+# Extract the contents of the director node
 xml_contents(director)
 
+# Extract the text content of the director node
 xml_text(director)
