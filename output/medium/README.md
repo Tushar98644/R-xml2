@@ -18,7 +18,7 @@ of nested \<node\> elements under the root \<node\> element.
 
 ## Setting Up the Environment
 
-### <u>**Section 1: Loading Libraries and parsing XML Content**</u>
+### <u>Section 1: Loading Libraries and parsing XML Content</u>
 
 ``` r
 library(XML)
@@ -99,7 +99,7 @@ doc
 
 - The **parsed** XML document is stored in the variable xml_doc.  
 
-### <u>**Section 2:** Navigation of XML Tree</u>
+### <u>Section 2: Navigation of XML Tree</u>
 
 #### <u>2.1 Access the root Node</u>
 
@@ -223,7 +223,7 @@ tu_mama
 - **xmlChildren(movies)$$\[2$$\]** accesses the second movie node from
   the child nodes of “movies”.
 
-### <u>**Section 3:** Inspecting first node</u>
+### <u>Section 3: Inspecting first node</u>
 
 #### <u>3.1 Inspecting contents of the children of movies node</u>
 
@@ -360,7 +360,7 @@ xmlValue(title1)
 - **xmlValue(title1)** extracts the text content of the ‘title1’ node,
   representing the title of the movie.
 
-### <u>**Section 4:** Inspecting director node</u>
+### <u>Section 4: Inspecting director node</u>
 
 ``` r
 # Access the director node of 'good_will' 

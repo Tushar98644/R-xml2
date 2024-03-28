@@ -10,7 +10,7 @@ simple XML document to extract the director name for the second movie.
 
 ## Setting Up the Environment
 
-### <u>**Section 1: Loading Libraries and XML String**</u>
+### <u>Section 1: Loading Libraries and XML String</u>
 
 ``` r
 library(xml2)
@@ -49,7 +49,7 @@ xml_string <- c( '<?xml version="1.0" encoding="UTF-8"?>',
 - An XML string representing a list of movies is defined, including
   details like **title**, **director**, **year**, and **genre**.  
 
-### <u>**Section 2: Parsing the XML Document**</u>
+### <u>Section 2: Parsing the XML Document</u>
 
 ``` r
 doc <- read_xml(paste(xml_string, collapse = ''))
@@ -71,7 +71,7 @@ doc
 
 - The **parsed** XML document is stored in the variable doc.
 
-### <u>**Section 3: Navigating the XML Document**</u>
+### <u>Section 3: Navigating the XML Document</u>
 
 ``` r
 tu_mama <- xml_child(doc, search = 2)
@@ -103,7 +103,7 @@ xml_children(tu_mama)
 - The **xml_child** function is used to select a specific child node by
   its index, in this case, the second movie.
 
-### <u>**Section 4: Extracting director Information**</u>
+### <u>Section 4: Extracting director Information</u>
 
 ``` r
 director <- xml_child(tu_mama,"director")

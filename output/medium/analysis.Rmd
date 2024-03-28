@@ -13,7 +13,7 @@ The medium test aims to **replicate** the **analysis** conducted in Section 41.1
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### [**Section 1: Loading Libraries and parsing XML Content**]{.underline}
+### [Section 1: Loading Libraries and parsing XML Content]{.underline}
 
 ```{r message=FALSE}
 
@@ -66,7 +66,7 @@ doc
 
 -   The **parsed** XML document is stored in the variable xml_doc.\
 
-### [**Section 2:** Navigation of XML Tree]{.underline}
+### [Section 2: Navigation of XML Tree]{.underline}
 
 #### [2.1 Access the root Node]{.underline}
 
@@ -112,7 +112,7 @@ tu_mama
 
 -   **xmlChildren(movies)\[\[2\]\]** accesses the second movie node from the child nodes of "movies".
 
-### [**Section 3:** Inspecting first node]{.underline}
+### [Section 3: Inspecting first node]{.underline}
 
 #### [3.1 Inspecting contents of the children of movies node]{.underline}
 
@@ -173,7 +173,7 @@ xmlValue(title1)
 
 -   **xmlValue(title1)** extracts the text content of the 'title1' node, representing the title of the movie.
 
-### [**Section 4:** Inspecting director node]{.underline}
+### [Section 4: Inspecting director node]{.underline}
 
 ```{r message=FALSE}
 
