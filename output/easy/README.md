@@ -1,6 +1,13 @@
 Easy Test Analysis
 ================
 
+# Easy Test
+
+The easy test focuses on basic XML parsing using the xml2 package. It
+involves extracting specific information from a simple XML document. The
+code snippet below demonstrates how to load the xml2 package and parse a
+simple XML document to extract the director name for the second movie.
+
 ## Introduction
 
 This document demonstrates the analysis of XML data using R, focusing on
@@ -10,18 +17,13 @@ manipulate XML data.
 
 ## Setting Up the Environment
 
-## XML Data
-
-The XML string contains information about two movies, including their
-titles, directors, release years, and genres. The structure of the XML
-string is hierarchical, with each movie enclosed within `<movie>` tags.
+### <u>**Section 1: Loading Libraries and XML String**</u>
 
 ``` r
-library(xml2) 
+library(xml2)
 library(stringr)
 
-xml_string <- c(
-  '<?xml version="1.0" encoding="UTF-8"?>',
+xml_string <- c( '<?xml version="1.0" encoding="UTF-8"?>',
   '<movies>',
   '<movie mins="126" lang="eng">',
   '<title>Good Will Hunting</title>',
@@ -44,12 +46,17 @@ xml_string <- c(
   '</movies>')
 ```
 
-## Parsing XML Data
+**Explanation:**
 
-To analyze the XML data, we first need to parse it into an R object. The
-`read_xml` function from the `xml2` library is used for this purpose.
-This function converts the XML string into an XML document object, which
-can then be manipulated using R.
+- The **xml2** library is loaded to handle XML data in R.
+
+- The **stringr** library is loaded for string manipulation, though it’s
+  not used in this snippet.
+
+- An XML string representing a list of movies is defined, including
+  details like **title**, **director**, **year**, and **genre**.  
+
+### <u>**Section 2: Parsing the XML Document**</u>
 
 ``` r
 doc <- read_xml(paste(xml_string, collapse = ''))
@@ -61,16 +68,21 @@ doc
     ## [1] <movie mins="126" lang="eng">\n  <title>Good Will Hunting</title>\n  <dir ...
     ## [2] <movie mins="106" lang="spa">\n  <title>Y tu mama tambien</title>\n  <dir ...
 
-## Extracting Movie Information
+**Explanation:**
 
-To extract information about a specific movie, we use the `xml_child`
-function to select the movie by its position in the XML document. We
-then use the `xml_children` function to access the child nodes of the
-movie, such as the title, director, year, and genre.
+- The **read_xml** function from the xml2 package is used to parse the
+  XML string into an XML document object.
+
+- The paste function with **collapse = ’’** is used to concatenate the
+  XML string into a single string before parsing.
+
+- The **parsed** XML document is stored in the variable doc.
+
+### <u>**Section 3: Navigating the XML Document**</u>
 
 ``` r
-mama_tambien <- xml_child(doc, search = 2) 
-mama_tambien
+tu_mama <- xml_child(doc, search = 2)
+tu_mama
 ```
 
     ## {xml_node}
@@ -81,7 +93,7 @@ mama_tambien
     ## [4] <genre>drama</genre>
 
 ``` r
-xml_children(mama_tambien)
+xml_children(tu_mama)
 ```
 
     ## {xml_nodeset (4)}
@@ -90,34 +102,18 @@ xml_children(mama_tambien)
     ## [3] <year>2001</year>
     ## [4] <genre>drama</genre>
 
-## Displaying Results
+**Explanation**
 
-The `xml_name` function is used to display the name of the XML node,
-while the `xml_attrs` function shows the attributes of the node. This
-provides a clear overview of the movie’s information.
+- The **xml_children** function lists all child nodes of the XML
+  document.
 
-``` r
-xml_name(mama_tambien) 
-```
+- The **xml_child** function is used to select a specific child node by
+  its index, in this case, the second movie.
 
-    ## [1] "movie"
+### <u>**Section 4: Extracting director Information**</u>
 
 ``` r
-xml_attrs(mama_tambien)
-```
-
-    ##  mins  lang 
-    ## "106" "spa"
-
-## Extracting Director Information
-
-To extract information about a specific movie, we use the `xml_child`
-function to select the movie by its position in the XML document. We
-then use the `xml_children` function to access the child nodes of the
-movie, such as the title, director, year, and genre.
-
-``` r
-director <- xml_child(mama_tambien,"director")
+director <- xml_child(tu_mama,"director")
 director
 ```
 
@@ -127,7 +123,26 @@ director
     ## [2] <last_name>Cuaron</last_name>
 
 ``` r
+xml_contents(director)
+```
+
+    ## {xml_nodeset (2)}
+    ## [1] <first_name>Alfonso</first_name>
+    ## [2] <last_name>Cuaron</last_name>
+
+``` r
 xml_text(director)
 ```
 
     ## [1] "AlfonsoCuaron"
+
+**Explanation**
+
+- The **xml_child** function is used again to select the “director”
+  child node of the selected movie.
+
+- The **xml_contents** function lists all nodes within the “director”
+  node.
+
+- The **xml_text** function extracts the text content of the “director”
+  node, providing the **director’s name**.
