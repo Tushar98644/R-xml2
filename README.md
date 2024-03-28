@@ -8,6 +8,7 @@ Welcome to the R-xml2 repository! This repository contains tests and examples fo
 - [Tests Overview](#tests-overview)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Viewing Test Results](#viewing-test-results)
 - [Contributing](#contributing)
 - [License](#license)
 
