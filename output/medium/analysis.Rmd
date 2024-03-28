@@ -1,6 +1,6 @@
 ---
 title: "Medium Test Analysis"
-output: github_document
+output: pdf_document
 ---
 
 ## Introduction
@@ -108,9 +108,9 @@ tu_mama
 
 -   **xmlChildren(movies)** retrieves the child nodes of the node "movies".
 
--   **xmlChildren(movies)\[\[1\]\]** accesses the first movie node from the child nodes of "movies".
+-   **xmlChildren(movies)[[1]]** accesses the first movie node from the child nodes of "movies".
 
--   **xmlChildren(movies)\[\[2\]\]** accesses the second movie node from the child nodes of "movies".
+-   **xmlChildren(movies)[[2]]** accesses the second movie node from the child nodes of "movies".
 
 ### [Section 3: Inspecting first node]{.underline}
 
@@ -167,7 +167,7 @@ xmlValue(title1)
 
 -   **xmlChildren(good_will)** retrieves the child nodes of the 'good_will' node.
 
--   **xmlChildren(good_will)\[\["title"\]\]** accesses the 'title' node within the 'good_will' node.
+-   **xmlChildren(good_will)[["title"]]** accesses the 'title' node within the 'good_will' node.
 
 -   **xmlChildren(title1)** accesses the child nodes of the 'title1' node
 
@@ -190,7 +190,7 @@ xmlValue(dir1)
 
 **Explanation**
 
--   **xmlChildren(good_will)\[\["director"\]\]** accesses the 'director' node within the 'good_will' node.
+-   **xmlChildren(good_will)[["director"]]** accesses the 'director' node within the 'good_will' node.
 
 -   **xmlChildren(dir1)** accesses the child nodes of the 'dir1' node.
 

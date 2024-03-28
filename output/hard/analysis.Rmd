@@ -1,6 +1,6 @@
 ---
 title: "Hard Test Analysis"
-output: github_document
+output: pdf_document
 ---
 
 ## Introduction
