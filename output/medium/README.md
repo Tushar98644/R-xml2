@@ -3,55 +3,62 @@ Medium Test Analysis
 
 ## Introduction
 
-This document demonstrates the analysis of XML data using R, focusing on
-extracting information about movies from an XML string. The analysis
-leverages the `XML` library in R to parse and manipulate XML data.
+The medium test aims to **replicate** the **analysis** conducted in
+Section 41.1.3 using functions from the **XML** package. This test
+focuses on transforming XML data into a **structured** **data frame**
+for further analysis and reporting. The XML package, being an older
+package, offers a straightforward way to convert XML data into data
+frames, which is particularly useful for handling nested XML
+structures.The XML document provided in the test is a nested structure,
+with each \<**node**\> element containing potentially **nested**
+\<**node**\> elements (and some containing attributes). The goal is to
+extract specific information from this XML document, such as the
+**text** values, **length**, **attributes**,**name**,**children** etc.
+of nested \<node\> elements under the root \<node\> element.
 
 ## Setting Up the Environment
 
-## XML Data
-
-The XML string contains information about two movies, including their
-titles, directors, release years, and genres. The structure of the XML
-string is hierarchical, with each movie enclosed within `<movie>` tags.
+### <u>**Section 1: Loading Libraries and parsing XML Content**</u>
 
 ``` r
 library(XML)
+
 xml_content <- c(
-    '<?xml version="1.0" encoding="UTF-8"?>',
-    "<movies>",
-    '<movie mins="126" lang="eng">',
-    "<title>Good Will Hunting</title>",
-    "<director>",
-    "<first_name>Gus</first_name>",
-    "<last_name>Van Sant</last_name>",
-    "</director>",
-    "<year>1998</year>",
-    "<genre>drama</genre>",
-    "</movie>",
-    '<movie mins="106" lang="spa">',
-    "<title>Y tu mama tambien</title>",
-    "<director>",
-    "<first_name>Alfonso</first_name>",
-    "<last_name>Cuaron</last_name>",
-    "</director>",
-    "<year>2001</year>",
-    "<genre>drama</genre>",
-    "</movie>",
-    "</movies>"
+ '<?xml version="1.0" encoding="UTF-8"?>',
+ '<movies>',
+ '<movie mins="126" lang="eng">',
+ '<title>Good Will Hunting</title>',
+ '<director>',
+ '<first_name>Gus</first_name>',
+ '<last_name>Van Sant</last_name>',
+ '</director>',
+ '<year>1998</year>',
+ '<genre>drama</genre>',
+ '</movie>',
+ '<movie mins="106" lang="spa">',
+ '<title>Y tu mama tambien</title>',
+ '<director>',
+ '<first_name>Alfonso</first_name>',
+ '<last_name>Cuaron</last_name>',
+ '</director>',
+ '<year>2001</year>',
+ '<genre>drama</genre>',
+ '</movie>',
+ '</movies>'
 )
 ```
 
-## Parsing XML Data
+**Explanation**
 
-To analyze the XML data, we first need to parse it into an R object. The
-`xmlTreeParse` function from the `XML` library is used for this purpose.
-This function converts the XML string into an XML document object, which
-can then be manipulated using R.
+- The **XML** library is loaded to handle XML data in R.
+
+- An XML content string representing a list of movies is defined,
+  including details like **title**, **director**, **year**, and
+  **genre**.
 
 ``` r
-xml_doc <- xmlTreeParse(paste(xml_content, collapse = ""), useInternalNodes = TRUE)
-print(xml_doc)
+doc <- xmlTreeParse(paste(xml_content, collapse = ''), useInternalNodes = TRUE)
+doc
 ```
 
     ## <?xml version="1.0" encoding="UTF-8"?>
@@ -77,110 +84,327 @@ print(xml_doc)
     ## </movies>
     ## 
 
-## Extracting Movie Information
+**Explanation**
 
-To extract information about the movies, we use the `xmlRoot` function
-to access the root node of the XML document. We then iterate over the
-child nodes of the root node, which represent the movies, and extract
-their information.
+- The **xmlTreeParse** function from the XML package is used to parse
+  the XML string into an XML document object.
+
+- The **paste** function with **collapse = ’ ’** is used to concatenate
+  the XML string into a single string before parsing.
+
+- The **useInternalNodes** = **TRUE** argument specifies that the
+  function should return an internal node, which is more efficient for
+  extracting parts of the XML
+  document[1](https://stackoverflow.com/questions/20684507/in-r-xml-package-what-is-the-difference-between-xmlparse-and-xmltreeparse).
+
+- The **parsed** XML document is stored in the variable xml_doc.  
+
+### <u>**Section 2:** Navigation of XML Tree</u>
+
+#### <u>2.1 Access the root Node</u>
 
 ``` r
-movies_node <- xmlRoot(xml_doc)
-
-cat("Root Node Name:", xmlName(movies_node), "\n")
+# Get the root node of the XML document
+movies <- xmlRoot(doc)
+movies
 ```
 
-    ## Root Node Name: movies
+    ## <movies>
+    ##   <movie mins="126" lang="eng">
+    ##     <title>Good Will Hunting</title>
+    ##     <director>
+    ##       <first_name>Gus</first_name>
+    ##       <last_name>Van Sant</last_name>
+    ##     </director>
+    ##     <year>1998</year>
+    ##     <genre>drama</genre>
+    ##   </movie>
+    ##   <movie mins="106" lang="spa">
+    ##     <title>Y tu mama tambien</title>
+    ##     <director>
+    ##       <first_name>Alfonso</first_name>
+    ##       <last_name>Cuaron</last_name>
+    ##     </director>
+    ##     <year>2001</year>
+    ##     <genre>drama</genre>
+    ##   </movie>
+    ## </movies>
 
 ``` r
-root_attrs <- xmlAttrs(movies_node)
-
-cat("Root Node Attributes:", "\n")
+# Check if the XML document and the root node are identical
+identical(doc, movies)
 ```
 
-    ## Root Node Attributes:
+    ## [1] FALSE
+
+It turns out that `doc` and `movies` are not actually identical
+
+**Explanation**
+
+- The **xmlRoot** function extracts the root node of the XML document,
+  which is stored in movies.
+
+- The identical function checks if the **root** **node** is the same as
+  the **original document**, demonstrating the structure of the XML
+  document.
+
+#### <u>2.2 Access the children of movies node</u>
 
 ``` r
-print(root_attrs)
+# Access the child nodes of the root node
+xmlChildren(movies)
 ```
 
-    ## NULL
+    ## $movie
+    ## <movie mins="126" lang="eng">
+    ##   <title>Good Will Hunting</title>
+    ##   <director>
+    ##     <first_name>Gus</first_name>
+    ##     <last_name>Van Sant</last_name>
+    ##   </director>
+    ##   <year>1998</year>
+    ##   <genre>drama</genre>
+    ## </movie> 
+    ## 
+    ## $movie
+    ## <movie mins="106" lang="spa">
+    ##   <title>Y tu mama tambien</title>
+    ##   <director>
+    ##     <first_name>Alfonso</first_name>
+    ##     <last_name>Cuaron</last_name>
+    ##   </director>
+    ##   <year>2001</year>
+    ##   <genre>drama</genre>
+    ## </movie> 
+    ## 
+    ## attr(,"class")
+    ## [1] "XMLInternalNodeList" "XMLNodeList"
 
 ``` r
-movie_nodes <- xmlChildren(movies_node)
+# Access the first movie node
+good_will <- xmlChildren(movies)[[1]]
+good_will
 ```
 
-## Iterate through each Movie child node and display Information
+    ## <movie mins="126" lang="eng">
+    ##   <title>Good Will Hunting</title>
+    ##   <director>
+    ##     <first_name>Gus</first_name>
+    ##     <last_name>Van Sant</last_name>
+    ##   </director>
+    ##   <year>1998</year>
+    ##   <genre>drama</genre>
+    ## </movie>
 
 ``` r
-for (i in seq_along(movie_nodes)) {
-    movie_node <- movie_nodes[[i]]
+# Access the second movie node
+tu_mama <- xmlChildren(movies)[[2]]
+tu_mama
+```
 
-    cat("Movie Node", i, "Name:", xmlName(movie_node), "\n")
+    ## <movie mins="106" lang="spa">
+    ##   <title>Y tu mama tambien</title>
+    ##   <director>
+    ##     <first_name>Alfonso</first_name>
+    ##     <last_name>Cuaron</last_name>
+    ##   </director>
+    ##   <year>2001</year>
+    ##   <genre>drama</genre>
+    ## </movie>
 
-    movie_attrs <- xmlAttrs(movie_node)
+**Explanation**
 
-    cat("Movie Node", i, "Attributes:", "\n")
+- **xmlChildren(movies)** retrieves the child nodes of the node
+  “movies”.
 
-    print(movie_attrs)
+- **xmlChildren(movies)$$\[1$$\]** accesses the first movie node from
+  the child nodes of “movies”.
 
-    movie_children <- xmlChildren(movie_node)
+- **xmlChildren(movies)$$\[2$$\]** accesses the second movie node from
+  the child nodes of “movies”.
 
-    for (j in seq_along(movie_children)) {
-        child_node <- movie_children[[j]]
+### <u>**Section 3:** Inspecting first node</u>
 
-        cat("Child Node", j, "Name:", xmlName(child_node), "\n")
+#### <u>3.1 Inspecting contents of the children of movies node</u>
 
-        cat("Child Node", j, "Content:", xmlValue(child_node), "\n")
+``` r
+# Access the children nodes of 'good_will'
+xmlChildren(good_will)
+```
 
-        child_attrs <- xmlAttrs(child_node)
+    ## $title
+    ## <title>Good Will Hunting</title> 
+    ## 
+    ## $director
+    ## <director>
+    ##   <first_name>Gus</first_name>
+    ##   <last_name>Van Sant</last_name>
+    ## </director> 
+    ## 
+    ## $year
+    ## <year>1998</year> 
+    ## 
+    ## $genre
+    ## <genre>drama</genre> 
+    ## 
+    ## attr(,"class")
+    ## [1] "XMLInternalNodeList" "XMLNodeList"
 
-        cat("Child Node", j, "Attributes:", "\n")
-        print(child_attrs)
-    }
+``` r
+# Access the children nodes of 'tu_mama'
+xmlChildren(tu_mama)
+```
 
-    cat("\n")
+    ## $title
+    ## <title>Y tu mama tambien</title> 
+    ## 
+    ## $director
+    ## <director>
+    ##   <first_name>Alfonso</first_name>
+    ##   <last_name>Cuaron</last_name>
+    ## </director> 
+    ## 
+    ## $year
+    ## <year>2001</year> 
+    ## 
+    ## $genre
+    ## <genre>drama</genre> 
+    ## 
+    ## attr(,"class")
+    ## [1] "XMLInternalNodeList" "XMLNodeList"
+
+``` r
+# Get the name of the 'good_will' node
+xmlName(good_will)
+```
+
+    ## [1] "movie"
+
+``` r
+# Get the attributes of the 'good_will' node
+xmlAttrs(good_will)
+```
+
+    ##  mins  lang 
+    ## "126" "eng"
+
+``` r
+# Get the size (number of children) of the 'good_will' node
+xmlSize(good_will)
+```
+
+    ## [1] 4
+
+**Explanation**
+
+- The **xmlName** function is used to get the name of the **good_will**
+  node.
+
+- The **xmlAttrs** function is used to get the attributes of the root
+  node.
+
+- The **xmlChildren** function lists all child nodes of the root node,
+  which represent individual movies.
+
+#### <u>3.2 Inspecting contents of good_will node</u>
+
+``` r
+# Iterate over each child node of 'good_will' and print their names
+children_nodes <- xmlChildren(good_will)
+for (node in children_nodes) {
+  print(xmlName(node))
 }
 ```
 
-    ## Movie Node 1 Name: movie 
-    ## Movie Node 1 Attributes: 
-    ##  mins  lang 
-    ## "126" "eng" 
-    ## Child Node 1 Name: title 
-    ## Child Node 1 Content: Good Will Hunting 
-    ## Child Node 1 Attributes: 
-    ## NULL
-    ## Child Node 2 Name: director 
-    ## Child Node 2 Content: GusVan Sant 
-    ## Child Node 2 Attributes: 
-    ## NULL
-    ## Child Node 3 Name: year 
-    ## Child Node 3 Content: 1998 
-    ## Child Node 3 Attributes: 
-    ## NULL
-    ## Child Node 4 Name: genre 
-    ## Child Node 4 Content: drama 
-    ## Child Node 4 Attributes: 
-    ## NULL
+    ## [1] "title"
+    ## [1] "director"
+    ## [1] "year"
+    ## [1] "genre"
+
+``` r
+# Access the title node of 'good_will'
+title1 <- xmlChildren(good_will)[["title"]]
+title1
+```
+
+    ## <title>Good Will Hunting</title>
+
+``` r
+# Access the children nodes of 'title1'
+xmlChildren(title1)
+```
+
+    ## $text
+    ## Good Will Hunting 
     ## 
-    ## Movie Node 2 Name: movie 
-    ## Movie Node 2 Attributes: 
-    ##  mins  lang 
-    ## "106" "spa" 
-    ## Child Node 1 Name: title 
-    ## Child Node 1 Content: Y tu mama tambien 
-    ## Child Node 1 Attributes: 
-    ## NULL
-    ## Child Node 2 Name: director 
-    ## Child Node 2 Content: AlfonsoCuaron 
-    ## Child Node 2 Attributes: 
-    ## NULL
-    ## Child Node 3 Name: year 
-    ## Child Node 3 Content: 2001 
-    ## Child Node 3 Attributes: 
-    ## NULL
-    ## Child Node 4 Name: genre 
-    ## Child Node 4 Content: drama 
-    ## Child Node 4 Attributes: 
-    ## NULL
+    ## attr(,"class")
+    ## [1] "XMLInternalNodeList" "XMLNodeList"
+
+``` r
+# Get the text content of 'title1'
+xmlValue(title1)
+```
+
+    ## [1] "Good Will Hunting"
+
+**Explanation**
+
+- **xmlChildren(good_will)** retrieves the child nodes of the
+  ‘good_will’ node.
+
+- **xmlChildren(good_will)$$\["title"$$\]** accesses the ‘title’ node
+  within the ‘good_will’ node.
+
+- **xmlChildren(title1)** accesses the child nodes of the ‘title1’ node
+
+- **xmlValue(title1)** extracts the text content of the ‘title1’ node,
+  representing the title of the movie.
+
+### <u>**Section 4:** Inspecting director node</u>
+
+``` r
+# Access the director node of 'good_will' 
+dir1 <- xmlChildren(good_will)[["director"]]
+dir1
+```
+
+    ## <director>
+    ##   <first_name>Gus</first_name>
+    ##   <last_name>Van Sant</last_name>
+    ## </director>
+
+``` r
+# Access the children nodes of 'dir1'
+xmlChildren(dir1)
+```
+
+    ## $first_name
+    ## <first_name>Gus</first_name> 
+    ## 
+    ## $last_name
+    ## <last_name>Van Sant</last_name> 
+    ## 
+    ## attr(,"class")
+    ## [1] "XMLInternalNodeList" "XMLNodeList"
+
+``` r
+# Get the text content of 'dir1'
+xmlValue(dir1)
+```
+
+    ## [1] "GusVan Sant"
+
+**Explanation**
+
+- **xmlChildren(good_will)$$\["director"$$\]** accesses the ‘director’
+  node within the ‘good_will’ node.
+
+- **xmlChildren(dir1)** accesses the child nodes of the ‘dir1’ node.
+
+- **xmlValue(dir1)** extracts the text content of the ‘dir1’ node,
+  representing the director’s name.
+
+The following **results** obtained from the code can be compared with
+the required section outlinedexample data set in [Section 41.1.3 of
+Computing with
+Data](https://www.gastonsanchez.com/intro2cwd/parsing.html#navigation-of-xml-html-tree)
