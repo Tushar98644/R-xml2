@@ -27,98 +27,72 @@ xml_content <- c(
 )
 
 # Parse the XML content into an XML document
-xml_doc <- xmlTreeParse(paste(xml_content, collapse = ''), useInternalNodes = TRUE)
+doc <- xmlTreeParse(paste(xml_content, collapse = ''), useInternalNodes = TRUE)
 
 # Print the XML document
-xml_doc
+doc
 
 # Check the class of the XML document
-class(xml_doc)
-
-# Get the size of the XML document
-xmlSize(xml_doc)
+class(doc)
 
 # Get the root node of the XML document
-movies_node <- xmlRoot(xml_doc)
-movies_node
+movies <- xmlRoot(doc)
+movies
 
 # Check the class of the root node
-class(movies_node)
-
-# Get the size of the root node
-xmlSize(movies_node)
+class(movies)
 
 # Check if the XML document and the root node are identical
-identical(xml_doc, movies_node)
+identical(doc, movies)
 
-# Print the name of the root node
-cat("Root Node Name:", xmlName(movies_node), "\n")
+# Access the child nodes of the root node
+xmlChildren(movies)
 
-# Get the attributes of the root node
-root_attrs <- xmlAttrs(movies_node)
+# Access the first movie node
+good_will <- xmlChildren(movies)[[1]]
+good_will
 
-cat("Root Node Attributes:","\n")
-print(root_attrs)
+# Access the second movie node
+tu_mama <- xmlChildren(movies)[[2]]
+tu_mama
 
-# Get the child nodes of the root node
-movie_nodes <- xmlChildren(movies_node)
-print(movie_nodes)
+# Access the children nodes of 'good_will'
+xmlChildren(good_will)
 
-# Iterate over each movie node
-for (i in seq_along(movie_nodes)) {
-  
-  movie_node <- movie_nodes[[i]]
-  
-  cat("Movie Node", i, "Name:", xmlName(movie_node), "\n")
-  
-  # Get the attributes of the movie node
-  movie_attrs <- xmlAttrs(movie_node)
-  
-  cat("Movie Node", i, "Attributes:", "\n")
-  print(movie_attrs)
-  
-  # Get the size of the movie node
-  movie_node_length <- xmlSize(movie_node)
-  
-  cat("Movie Node", i, "Length:", "\n")
-  print(movie_node_length)
-  
-  # Get the child nodes of the movie node
-  movie_node_children <- xmlChildren(movie_node)
-  
-  cat("Movie Node", i, "Children:", "\n")
-  print(movie_node_children)
-  
-  # Iterate over each child node of the movie node
-  movie_children <- xmlChildren(movie_node)
-  
-  for (j in seq_along(movie_children)) {
-    child_node <- movie_children[[j]]
-    
-    cat("Child Node", j, "Name:", xmlName(child_node), "\n")
-    
-    # Get the text content of the child node
-    cat("Child Node", j, "Content:", xmlValue(child_node), "\n")
-    
-    # Get the attributes of the child node
-    child_attrs <- xmlAttrs(child_node)
-    
-    cat("Child Node", j, "Attributes:", "\n")
-    print(child_attrs)
-    
-    # Get the size of the child node
-    child_length <- xmlSize(child_node)
-    
-    cat("Child Node", j, "Length:", "\n")
-    print(child_length)
-    
-    # Get the child nodes of the child node
-    child_children <- xmlChildren(child_node)
-    
-    cat("Child Node", j, "Children:", "\n")
-    print(child_children)
-    
-  }
-  
-  cat("\n")
+# Access the children nodes of 'tu_mama'
+xmlChildren(tu_mama)
+
+# Get the name of the 'good_will' node
+xmlName(good_will)
+
+# Get the attributes of the 'good_will' node
+xmlAttrs(good_will)
+
+# Get the size (number of children) of the 'good_will' node
+xmlSize(good_will)
+
+# Iterate over each child node of 'good_will' and print their names
+children_nodes <- xmlChildren(good_will)
+for (node in children_nodes) {
+  print(xmlName(node))
 }
+
+# Access the first child node of 'good_will' (the title node)
+title1 <- xmlChildren(good_will)[[1]]
+title1
+
+# Attempt to access the children nodes of 'title1' (which is a leaf node, so this will return NULL)
+xmlChildren(title1)
+
+# Get the text content of 'title1' (the title of the movie)
+xmlValue(title1)
+
+# Access the second child node of 'good_will' (the director node)
+dir1 <- xmlChildren(good_will)[[2]]
+dir1
+
+# Access the children nodes of 'dir1' (the first and last name of the director)
+xmlChildren(dir1)
+
+# Get the text content of 'dir1'
+xmlValue(dir1)
