@@ -34,14 +34,14 @@ doc <- read_xml(paste(xml_string, collapse = ''))
 doc
 
 # Extract the second movie node from the XML document
-mama_tambien <- xml_child(doc, search = 2)
-mama_tambien
+tu_mama <- xml_child(doc, search = 2)
+tu_mama
 
 # List all child nodes of the second movie node
-xml_children(mama_tambien)
+xml_children(tu_mama)
 
 # Extract the director node from the second movie node
-director <- xml_child(mama_tambien, "director")
+director <- xml_child(tu_mama, "director")
 director
 
 # Extract the contents of the director node
