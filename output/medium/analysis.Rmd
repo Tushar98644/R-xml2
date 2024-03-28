@@ -1,6 +1,6 @@
 ---
 title: "Medium Test Analysis"
-output: pdf_document
+output: github_document
 ---
 
 ## Introduction
