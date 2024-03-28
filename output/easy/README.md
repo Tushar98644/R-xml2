@@ -1,19 +1,12 @@
 Easy Test Analysis
 ================
 
-# Easy Test
+## Introduction
 
 The easy test focuses on basic XML parsing using the xml2 package. It
 involves extracting specific information from a simple XML document. The
 code snippet below demonstrates how to load the xml2 package and parse a
 simple XML document to extract the director name for the second movie.
-
-## Introduction
-
-This document demonstrates the analysis of XML data using R, focusing on
-extracting information about movies from an XML string. The analysis
-leverages the `xml2` and `stringr` libraries in R to parse and
-manipulate XML data.
 
 ## Setting Up the Environment
 

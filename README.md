@@ -65,8 +65,8 @@ library(stringr)
 
 Click on the specific test to view the results:
 
-- [Easy Test Analysis](https://tushar98644.github.io/R-xml2/output/easy/analysis.html)
-- [Medium Test Analysis](https://tushar98644.github.io/R-xml2/output/medium/analysis.html)
+- [Easy Test Analysis](https://tushar98644.github.io/R-xml2/output/easy)
+- [Medium Test Analysis](https://tushar98644.github.io/R-xml2/output/medium)
 
 # Contributing
 
