@@ -77,21 +77,21 @@ for (node in children_nodes) {
   print(xmlName(node))
 }
 
-# Access the first child node of 'good_will' (the title node)
-title1 <- xmlChildren(good_will)[[1]]
+# Access the title node of 'good_will'
+title1 <- xmlChildren(good_will)[["title"]]
 title1
 
-# Attempt to access the children nodes of 'title1' (which is a leaf node, so this will return NULL)
+# Attempt to access the children nodes of 'title1'
 xmlChildren(title1)
 
-# Get the text content of 'title1' (the title of the movie)
+# Get the text content of 'title1'
 xmlValue(title1)
 
-# Access the second child node of 'good_will' (the director node)
-dir1 <- xmlChildren(good_will)[[2]]
+# Access the director node of 'good_will' 
+dir1 <- xmlChildren(good_will)[["director"]]
 dir1
 
-# Access the children nodes of 'dir1' (the first and last name of the director)
+# Access the children nodes of 'dir1' 
 xmlChildren(dir1)
 
 # Get the text content of 'dir1'
