@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>GSoC Project Task: Supporting Migration from XML Package | R-xml2</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="GSoC Project Task: Supporting Migration from XML Package" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This repository contains R scripts and R Markdown files for parsing and analyzing XML data using the xml2 package" />
+<meta property="og:description" content="This repository contains R scripts and R Markdown files for parsing and analyzing XML data using the xml2 package" />
+<link rel="canonical" href="http://localhost:4000/README.html" />
+<meta property="og:url" content="http://localhost:4000/README.html" />
+<meta property="og:site_name" content="R-xml2" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="GSoC Project Task: Supporting Migration from XML Package" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"This repository contains R scripts and R Markdown files for parsing and analyzing XML data using the xml2 package","headline":"GSoC Project Task: Supporting Migration from XML Package","url":"http://localhost:4000/README.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/assets/css/style.css?v=de1ccd230537c48674fd2c0086d301a50abd476e">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">GSoC Project Task: Supporting Migration from XML Package</h1>
+      <h2 class="project-tagline">This repository contains R scripts and R Markdown files for parsing and analyzing XML data using the xml2 package</h2>
+      
+        <a href="https://github.com/Tushar98644/R-xml2" class="btn">View on GitHub</a>
+      
+      
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      <h1 id="gsoc-project-task-supporting-migration-from-xml-package">GSoC Project Task: Supporting Migration from XML Package</h1>
+
+<p>Welcome to the R-xml2 repository! This repository contains tests and examples for working with XML content using the xml2 package in R. Below you’ll find information on how to navigate this repository and run the provided tests. This project aims to contribute to the migration efforts from the XML package to the xml2 package in R.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#tests-overview">Tests Overview</a></li>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#usage">Usage</a></li>
+  <li><a href="#viewing-test-results">Viewing Test Results</a></li>
+  <li><a href="#contributing">Contributing</a></li>
+  <li><a href="#license">License</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>The XML package in R has been in maintenance mode for several years, and there’s a push to migrate packages depending on XML to alternatives such as xml2, which is actively developed. This project aims to support this migration effort by contributing patches to packages dependent on XML, implementing the switch to xml2, and documenting example mappings from XML to xml2 code.</p>
+
+<h2 id="tests-overview">Tests Overview</h2>
+
+<p>This repository contains three tests:</p>
+
+<p><code class="language-plaintext highlighter-rouge">Easy Test</code>: This test demonstrates basic XML parsing using the xml2 package. It involves extracting specific information from a simple XML document.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Medium Test</code>: The medium test builds upon the concepts covered in the easy test and introduces more advanced XML parsing techniques. It involves replicating a given analysis using functions from the XML package.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Hard Test</code>: The hard test is the most challenging and requires advanced XML parsing skills. It involves writing a custom function to parse XML code without depending on the XML package.</p>
+
+<p>Each test is designed to progressively increase in difficulty, providing users with a comprehensive learning experience.</p>
+
+<h1 id="installation">Installation</h1>
+
+<p>Before running the tests or contributing to this project, ensure that you have the following packages installed:</p>
+
+<ol>
+  <li>xml2</li>
+  <li>XML</li>
+  <li>stringr</li>
+</ol>
+
+<p>You can install these packages using the following R commands:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>install.packages("xml2")
+install.packages("XML")
+install.packages("stringr")
+</code></pre></div></div>
+
+<h1 id="usage">Usage</h1>
+
+<p>To run the tests for this project, follow these steps:</p>
+
+<ol>
+  <li>Clone this repository to your local machine.</li>
+  <li>Open RStudio or any other R environment.</li>
+  <li>Load the required packages:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>library(xml2)
+library(XML)
+library(stringr)
+</code></pre></div></div>
+
+<ol>
+  <li>Navigate to the directory where the repository is cloned.</li>
+  <li>Run the desired test script (easy-test.R, medium-test.R, or hard-test.R) to execute the corresponding test.</li>
+  <li>Run the script in your R environment.</li>
+</ol>
+
+<h2 id="viewing-test-results">Viewing Test Results</h2>
+
+<p>Click on the specific test to view the results:</p>
+
+<ul>
+  <li><a href="https://tushar98644.github.io/R-xml2/output/easy">Easy Test Analysis</a></li>
+  <li><a href="https://tushar98644.github.io/R-xml2/output/medium">Medium Test Analysis</a></li>
+  <li><a href="https://tushar98644.github.io/R-xml2/output/hard">Hard Test Analysis</a></li>
+</ul>
+
+<h1 id="contributing">Contributing</h1>
+
+<p>Contributions to this repository are welcome! If you have ideas for additional tests, improvements to existing tests, or any other enhancements, feel free to open an issue or submit a pull request.</p>
+
+<p>Before contributing, please review the contribution guidelines.</p>
+
+<h1 id="license">License</h1>
+
+<p>This project is licensed under the <a href="/LICENSE">GPL-3.0 Public License</a>.</p>
+
+
+      <footer class="site-footer">
+        
+          <span class="site-footer-owner"><a href="https://github.com/Tushar98644/R-xml2">R-xml2</a> is maintained by <a href="https://github.com/Tushar98644">Tushar98644</a>.</span>
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
+</html>

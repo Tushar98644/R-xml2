@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Easy Test Analysis | R-xml2</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Easy Test Analysis" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This repository contains R scripts and R Markdown files for parsing and analyzing XML data using the xml2 package" />
+<meta property="og:description" content="This repository contains R scripts and R Markdown files for parsing and analyzing XML data using the xml2 package" />
+<link rel="canonical" href="http://localhost:4000/output/easy/README.html" />
+<meta property="og:url" content="http://localhost:4000/output/easy/README.html" />
+<meta property="og:site_name" content="R-xml2" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Easy Test Analysis" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"This repository contains R scripts and R Markdown files for parsing and analyzing XML data using the xml2 package","headline":"Easy Test Analysis","url":"http://localhost:4000/output/easy/README.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/assets/css/style.css?v=de1ccd230537c48674fd2c0086d301a50abd476e">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">Easy Test Analysis</h1>
+      <h2 class="project-tagline">This repository contains R scripts and R Markdown files for parsing and analyzing XML data using the xml2 package</h2>
+      
+        <a href="https://github.com/Tushar98644/R-xml2" class="btn">View on GitHub</a>
+      
+      
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      <h1 id="easy-test-analysis">Easy Test Analysis</h1>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>The easy test focuses on basic XML parsing using the xml2 package. It
+involves extracting specific information from a simple XML document. The
+code snippet below demonstrates how to load the xml2 package and parse a
+simple XML document to extract the director name for the second movie.</p>
+
+<h2 id="setting-up-the-environment">Setting Up the Environment</h2>
+
+<h3 id="section-1-loading-libraries-and-xml-string"><u>Section 1: Loading Libraries and XML String</u></h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">xml2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">stringr</span><span class="p">)</span><span class="w">
+
+</span><span class="n">xml_string</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="s1">'&lt;?xml version="1.0" encoding="UTF-8"?&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;movies&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;movie mins="126" lang="eng"&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;title&gt;Good Will Hunting&lt;/title&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;director&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;first_name&gt;Gus&lt;/first_name&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;last_name&gt;Van Sant&lt;/last_name&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;/director&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;year&gt;1998&lt;/year&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;genre&gt;drama&lt;/genre&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;/movie&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;movie mins="106" lang="spa"&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;title&gt;Y tu mama tambien&lt;/title&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;director&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;first_name&gt;Alfonso&lt;/first_name&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;last_name&gt;Cuaron&lt;/last_name&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;/director&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;year&gt;2001&lt;/year&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;genre&gt;drama&lt;/genre&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;/movie&gt;'</span><span class="p">,</span><span class="w">
+  </span><span class="s1">'&lt;/movies&gt;'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Explanation:</strong></p>
+
+<ul>
+  <li>
+    <p>The <strong>xml2</strong> library is loaded to handle XML data in R.</p>
+  </li>
+  <li>
+    <p>The <strong>stringr</strong> library is loaded for string manipulation, though it’s
+not used in this snippet.</p>
+  </li>
+  <li>
+    <p>An XML string representing a list of movies is defined, including
+details like <strong>title</strong>, <strong>director</strong>, <strong>year</strong>, and <strong>genre</strong>.</p>
+  </li>
+</ul>
+
+<h3 id="section-2-parsing-the-xml-document"><u>Section 2: Parsing the XML Document</u></h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">doc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_xml</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="n">xml_string</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">''</span><span class="p">))</span><span class="w">
+</span><span class="n">doc</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## {xml_document}
+## &lt;movies&gt;
+## [1] &lt;movie mins="126" lang="eng"&gt;\n  &lt;title&gt;Good Will Hunting&lt;/title&gt;\n  &lt;dir ...
+## [2] &lt;movie mins="106" lang="spa"&gt;\n  &lt;title&gt;Y tu mama tambien&lt;/title&gt;\n  &lt;dir ...
+</code></pre></div></div>
+
+<p><strong>Explanation:</strong></p>
+
+<ul>
+  <li>
+    <p>The <strong>read_xml</strong> function from the xml2 package is used to parse the
+XML string into an XML document object.</p>
+  </li>
+  <li>
+    <p>The paste function with <strong>collapse = ’’</strong> is used to concatenate the
+XML string into a single string before parsing.</p>
+  </li>
+  <li>
+    <p>The <strong>parsed</strong> XML document is stored in the variable doc.</p>
+  </li>
+</ul>
+
+<h3 id="section-3-navigating-the-xml-document"><u>Section 3: Navigating the XML Document</u></h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tu_mama</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">xml_child</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span><span class="w"> </span><span class="n">search</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">tu_mama</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## {xml_node}
+## &lt;movie mins="106" lang="spa"&gt;
+## [1] &lt;title&gt;Y tu mama tambien&lt;/title&gt;
+## [2] &lt;director&gt;\n  &lt;first_name&gt;Alfonso&lt;/first_name&gt;\n  &lt;last_name&gt;Cuaron&lt;/last ...
+## [3] &lt;year&gt;2001&lt;/year&gt;
+## [4] &lt;genre&gt;drama&lt;/genre&gt;
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">xml_children</span><span class="p">(</span><span class="n">tu_mama</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## {xml_nodeset (4)}
+## [1] &lt;title&gt;Y tu mama tambien&lt;/title&gt;
+## [2] &lt;director&gt;\n  &lt;first_name&gt;Alfonso&lt;/first_name&gt;\n  &lt;last_name&gt;Cuaron&lt;/last ...
+## [3] &lt;year&gt;2001&lt;/year&gt;
+## [4] &lt;genre&gt;drama&lt;/genre&gt;
+</code></pre></div></div>
+
+<p><strong>Explanation</strong></p>
+
+<ul>
+  <li>
+    <p>The <strong>xml_children</strong> function lists all child nodes of the XML
+document.</p>
+  </li>
+  <li>
+    <p>The <strong>xml_child</strong> function is used to select a specific child node by
+its index, in this case, the second movie.</p>
+  </li>
+</ul>
+
+<h3 id="section-4-extracting-director-information"><u>Section 4: Extracting director Information</u></h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">director</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">xml_child</span><span class="p">(</span><span class="n">tu_mama</span><span class="p">,</span><span class="s2">"director"</span><span class="p">)</span><span class="w">
+</span><span class="n">director</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## {xml_node}
+## &lt;director&gt;
+## [1] &lt;first_name&gt;Alfonso&lt;/first_name&gt;
+## [2] &lt;last_name&gt;Cuaron&lt;/last_name&gt;
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">xml_contents</span><span class="p">(</span><span class="n">director</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## {xml_nodeset (2)}
+## [1] &lt;first_name&gt;Alfonso&lt;/first_name&gt;
+## [2] &lt;last_name&gt;Cuaron&lt;/last_name&gt;
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">xml_text</span><span class="p">(</span><span class="n">director</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## [1] "AlfonsoCuaron"
+</code></pre></div></div>
+
+<p><strong>Explanation</strong></p>
+
+<ul>
+  <li>
+    <p>The <strong>xml_child</strong> function is used again to select the “director”
+child node of the selected movie.</p>
+  </li>
+  <li>
+    <p>The <strong>xml_contents</strong> function lists all nodes within the “director”
+node.</p>
+  </li>
+  <li>
+    <p>The <strong>xml_text</strong> function extracts the text content of the “director”
+node, providing the <strong>director’s name</strong>.</p>
+  </li>
+</ul>
+
+
+      <footer class="site-footer">
+        
+          <span class="site-footer-owner"><a href="https://github.com/Tushar98644/R-xml2">R-xml2</a> is maintained by <a href="https://github.com/Tushar98644">Tushar98644</a>.</span>
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
+</html>
